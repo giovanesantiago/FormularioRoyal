@@ -1,0 +1,166 @@
+Monta formulario para captar dados para analise
+
+# Entrada de dados 
+Form 
+Dados Pessoas
+Pagina 1 
+    CPF
+    Telefone
+    Dt Nasc
+    Moto ( select )
+        Options :
+            Meteor 350 Fireball
+            Meteor 350 Stellar
+            Meteor 350 Supernova
+            Himalayan 
+            Interceptor
+            Continental
+    Entrada
+    Prazo
+Pagina 2
+    Nome Completo 
+    Genero ( Select )
+        [] Masculino [] Feminino 
+    Estado Civil ( Select ) 
+        [] Solteiro [] Casado 
+            Se Casado {
+                Nome Completo do Conjuge 
+                Regime de comunhão ( Select ) 
+                    Options:
+                        Comunhão Parcial de Bens
+                        Separação total de Bens
+                        Comunhão Total de Bens
+                CPF Do Conjuge
+                Data de Nascimento do COnjugu
+            }
+    RG
+    Data de Emissão 
+    UF Documento ( select ) 
+        Options :
+            Acre - AC
+            Alagoas - AL
+            Amazonas- AM
+            Amapá - AP
+            Bahia - BA
+            Cearà - CE
+            Distrito Federal - DF
+            Espírito Santo - ES
+            Goias - GO
+            Maranhão- MA
+            Minas Gerais - MG
+            Mato Grosso do Sul - MS
+            Mato Grosso - MT
+            Pará - PA
+            Paraíba - PR
+            Pernambuco - PE
+            Paraná - PR
+            Rio de Janeiro - RJ
+            Rio Grande do Norte - RN
+            Rondônia - RO
+            Roraima - RR
+            Rio Grande do Sul - R$
+            Santa Catarina - SC
+            Sergipe - SE
+            São Paulo - SP 
+            Tocantins - TO
+
+    UF ( Select )
+        Options :
+            AC
+            AL
+            AM
+            AP
+            BA
+            CE
+            DF
+            ES
+            GO
+            MA
+            MG
+            MS
+            MT
+            PA
+            PR
+            PE
+            PR
+            RJ
+            RN
+            RO
+            R$
+            SC
+            SE
+            SP
+            TO
+    Naturalidade
+    Email 
+    Nome Da Mae
+    Nome Do Pai
+Ocupação
+Pagina 3
+    Cargo ( Select )
+        Options :
+            Aposentado
+                Se {
+                    Nome Da Instituição
+                }
+            Assalariado
+                Se {
+                    Nome da Empresa 
+                    Data de Admissão
+                }
+            Autônomo
+            Empresário
+                Se {
+                    CNPJ
+                    Nome Da Empresa
+                    Data de Abertura
+                }
+            Funcionário Público
+                Se {
+                    Nome da Empresa 
+                    Data de Admissão
+                }
+            Outros
+            Produtor Rural
+            Profissional Liberal
+    Profissão 
+    Tel Comercial
+    Renda
+    Patrimonio
+    Comprovante de Renda ( Select )
+        CRM/CRO
+        Extrato Bancário
+        Extrato INSS (consulta interne
+        Holerite/Contra-Cheque
+        IRRE
+        Não apresentou comprovante
+Endereço Residencial 
+Pagina 4
+    CEP
+    Rua
+    Numero
+    Complemento
+    Estado
+    Cidade
+    Bairro
+    Tel Residencial 
+
+[] O cliente autoriza a consulta de eventuais informações a seu respeito mantidas no sistema de informações de crédito organizado pelo Banco Central do Brasil
+
+# Tratamento de dados
+
+Onchange{
+    Validação e gravar dados na array state
+}
+Onsubmit pagina 1 {
+    validar campos vazios abrir pagina 2
+}
+
+#Saida de dados
+Enviar para email atraves do emailJS
+
+
+        
+
+
+
