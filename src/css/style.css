@@ -4,7 +4,7 @@
 }
 body {
     background-color: #000;  
-    padding: 200px 10px 100px 10px;  
+    padding: 150px 10px 100px 10px;  
 }
   
 
@@ -13,8 +13,8 @@ body {
     background-color: #15172b;
     border-radius: 20px;
     box-sizing: border-box;
-    height: 90%;
-    padding: 40px;
+    height: 1500px;
+    padding: 5px 50px 50px 50px;
     width: 90%;
   }
   
@@ -38,6 +38,7 @@ body {
     height: 110px;
     position: relative;
     width: 100%;
+    margin-bottom: 60px;
   }
   
   .ic1 {
@@ -128,7 +129,7 @@ body {
     
   }
 
-  @media (max-height: 800px) {
+  /* @media (max-height: 800px) {
     body {
       padding: 0;
       align-items: center;
@@ -255,4 +256,20 @@ body {
     .submit:active {
       background-color: #06b;
     }
-  }
+  } */
+
+  /* .form1{
+    ma
+  } */
+
+.form2 {
+  margin-top: 200px;
+  margin-bottom: 100px;
+}
+
+.error{
+  font-size: 3em;
+  float: right;
+  color: #dc2f55;
+  font-style: italic;
+}

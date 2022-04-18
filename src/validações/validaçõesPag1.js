@@ -1,4 +1,4 @@
-
+// Validação Pagina 1
  function cpf(value) {
     const cpf = value.replace(/[^0-9]/g, '')
     
@@ -44,7 +44,6 @@ function nasc(value) {
    const ano = parseInt(data.slice(0, 4)) 
    const dataAtual = new Date()
    const anoAtual = dataAtual.getFullYear()
-   console.log(anoAtual)
 
    if(anoAtual - ano > 18) {
        return true
@@ -71,6 +70,7 @@ function entrada(value) {
         return false
     }
 }
+
 
 export {cpf, tel, nasc, entrada }
 
