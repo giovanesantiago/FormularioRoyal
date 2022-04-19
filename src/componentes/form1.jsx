@@ -2,6 +2,7 @@ import React from "react"
 import { ReactDOM } from "react"
 import style from "../css/style.css"
 import { cpf, tel, nasc, entrada } from "../validações/validaçõesPag1"
+import { nome, rg } from "../validações/validaçõesPag2"
 
 
 
@@ -21,6 +22,13 @@ class Form1 extends React.Component {
             messageNoValidoENTRADA: '',
             prazo: '', 
             messageNoValidoPRAZO: '',
+            nome: '',
+            messageNoValidoNOME: '',
+            genero: '',
+            messageNoValidoGENERO: '',
+            rg: '',
+            messageNoValidoGENERO: '',
+            
         }
 
         this.handleOnChange = this.handleOnChange.bind(this)
@@ -79,6 +87,29 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoPRAZO: ''})
             }
         }
+        /* Pagina 2 */
+        if(name === 'nome'){
+            if(nome(value)){
+                this.setState({messageNoValidoNOME: ''})
+            }else{
+                this.setState({messageNoValidoNOME: 'NOME INVALIDO'})
+            }
+        }
+        if(name === 'genero') {
+            if(this.state.genero === '' || this.state.genero === 'selected' ){
+                this.setState({messageNoValidoGENERO: 'ESCOLHA UMA OPÇÂO'})
+            }else {
+                this.setState({messageNoValidoGENERO: ''})
+            }
+        }
+        if(name === 'rg'){
+            if(rg(value)){
+                this.setState({messageNoValidoGENERO: ''})
+            }else {
+                this.setState({messageNoValidoRG: 'RG INVALIDO'})
+            }
+        }
+        
     }
 
     handleOnChange(e) {
@@ -129,6 +160,30 @@ class Form1 extends React.Component {
         if(name === 'prazo'){
             this.setState({[name]: value})
         }
+        /* Pagina 2 */
+        if(name === 'nome'){
+            if(nome(value)){
+                this.setState({messageNoValidoNOME: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
+        }
+        if(name === 'genero') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
+        if(name === 'rg'){
+            if(rg(value)){
+                this.setState({messageNoValidoRG: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
+        }
+        
 
     }
     handleSubmitProx(e) {
@@ -162,8 +217,8 @@ class Form1 extends React.Component {
         e.preventDefault()
     }
     handleSubmitEnv(e) {
-        const { cpf, telefone, nasc, moto, entrada, prazo } = this.state
-        alert(`CPF : ${cpf} , telefone : ${telefone}, nascimento : ${nasc}, Moto, ${moto} Entrada: ${entrada}, Prazo : ${prazo}`)
+        const { cpf, telefone, nasc, moto, entrada, prazo, nome, genero } = this.state
+        alert(`CPF : ${cpf} , telefone : ${telefone}, nascimento : ${nasc}, Moto, ${moto} Entrada: ${entrada}, Prazo : ${prazo}, Nome: ${nome}`)
         e.preventDefault()
     }
 
@@ -176,24 +231,28 @@ class Form1 extends React.Component {
                 <form id="form1" onSubmit={this.handleSubmitProx} className="form form1">
                     <div className="title">Ola,</div>
                     <div className="subtitle">Preencha os dados abaixo :</div>
+                    {/* CPF */}
                    <div className="input-container ic1 cpf">
                        <input name="cpf" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">CPF</label>
                        <div className="error">{this.state.messageNoValidoCPF}</div>
                    </div>
+                   {/* TELEFONE */}
                    <div className="input-container ic2">
                        <input name="telefone" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">Telefone</label>
                        <div className="error">{this.state.messageNoValidoTEL}</div>
                    </div>
+                   {/* DATA DE NASCIMENTO */}
                    <div className="input-container ic2">
                        <input name="nasc" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="date" className="input" placeholder=" "/>
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">Data de nascimento</label>
                        <div className="error messageNaoValido">{this.state.messageNoValidoNASC}</div>
                    </div>
+                   {/* MOTO */}
                    <div className="input-container ic2">
                        <select name="moto" id="" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
                            <option value="selected"></option>
@@ -208,12 +267,14 @@ class Form1 extends React.Component {
                        <label className="placeholder" htmlFor="firsname">Moto</label>
                        <div className="error messageNaoValido">{this.state.messageNoValidoMOTO}</div>
                    </div>
+                   {/* ENTRADA */}
                    <div className="input-container ic2">
                        <input name="entrada" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">Entrada</label>
                        <div className="error messageNaoValido">{this.state.messageNoValidoENTRADA}</div>
                    </div>
+                   {/* PRAZO */}
                    <div className="input-container ic2">
                        <select name="prazo" id=""onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
                            <option value="selected"></option>
@@ -231,25 +292,32 @@ class Form1 extends React.Component {
                 </form>
                 {/* Pagina2 */}
                 <form id="form2" onSubmit={this.handleSubmitProx} className="form form2">
-                    <div className="title">Ola,</div>
-                    <div className="subtitle">Preencha os dados abaixo :</div>
-                   <div className="input-container ic1 cpf">
-                       <input name="cpf" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                    <div className="title">Pefeito,</div>
+                    <div className="subtitle">Vamos continuar ...</div>
+                    {/* NOME */}
+                   <div className="input-container ic1">
+                       <input name="nome" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
                        <div className="cut"></div>
-                       <label className="placeholder" htmlFor="firsname">CPF</label>
-                       <div className="error">{this.state.messageNoValidoCPF}</div>
+                       <label className="placeholder" htmlFor="firsname">Nome Completo</label>
+                       <div className="error">{this.state.messageNoValidoNOME}</div>
                    </div>
+                   {/* GENERO */}
                    <div className="input-container ic2">
-                       <input name="telefone" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <select name="genero" id="" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
+                           <option value="selected"></option>
+                           <option value="Masculino">Masculino</option>
+                           <option value="Femenino">Feminino</option>
+                       </select>
                        <div className="cut"></div>
-                       <label className="placeholder" htmlFor="firsname">Telefone</label>
-                       <div className="error">{this.state.messageNoValidoTEL}</div>
+                       <label className="placeholder" htmlFor="firsname">Genero</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoGENERO}</div>
                    </div>
-                   <div className="input-container ic2">
-                       <input name="nasc" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="date" className="input" placeholder=" "/>
+                   {/* RG */}
+                   <div className="input-container ic1">
+                       <input name="rg" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
                        <div className="cut"></div>
-                       <label className="placeholder" htmlFor="firsname">Data de nascimento</label>
-                       <div className="error messageNaoValido">{this.state.messageNoValidoNASC}</div>
+                       <label className="placeholder" htmlFor="firsname">RG</label>
+                       <div className="error">{this.state.messageNoValidoRG}</div>
                    </div>
                    <div className="input-container ic2">
                        <select name="moto" id="" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">

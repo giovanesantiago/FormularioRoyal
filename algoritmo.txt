@@ -22,18 +22,7 @@ Pagina 2
     Nome Completo 
     Genero ( Select )
         [] Masculino [] Feminino 
-    Estado Civil ( Select ) 
-        [] Solteiro [] Casado 
-            Se Casado {
-                Nome Completo do Conjuge 
-                Regime de comunhão ( Select ) 
-                    Options:
-                        Comunhão Parcial de Bens
-                        Separação total de Bens
-                        Comunhão Total de Bens
-                CPF Do Conjuge
-                Data de Nascimento do COnjugu
-            }
+    
     RG
     Data de Emissão 
     UF Documento ( select ) 
