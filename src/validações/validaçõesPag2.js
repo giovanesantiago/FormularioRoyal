@@ -14,6 +14,23 @@ function nome(value){
 }
 
 function rg(value) {
-    return true
+    const lowCase = value.search(RegExp('[a-z]')) > -1
+    const upperCase = value.search(RegExp('[A-Z]')) > -1
+
+    if(!lowCase && !upperCase && value !== '') {
+        return true
+    }else {
+        return false
+    }
+
 }
-export { nome, rg }
+
+function emissao(value){
+    if(value === '') {
+        return false
+    }else {
+        return true
+    }
+}
+
+export { nome, rg, emissao }

@@ -2,7 +2,7 @@ import React from "react"
 import { ReactDOM } from "react"
 import style from "../css/style.css"
 import { cpf, tel, nasc, entrada } from "../validações/validaçõesPag1"
-import { nome, rg } from "../validações/validaçõesPag2"
+import { nome, rg, emissao } from "../validações/validaçõesPag2"
 
 
 
@@ -28,6 +28,12 @@ class Form1 extends React.Component {
             messageNoValidoGENERO: '',
             rg: '',
             messageNoValidoGENERO: '',
+            emissao: '',
+            messageNoValidoEMISSAO: '',
+            ufdoc: '',
+            messageNoValidoUFDOC: '',
+            uf: '',
+            messageNoValidoUF: '',
             
         }
 
@@ -104,9 +110,30 @@ class Form1 extends React.Component {
         }
         if(name === 'rg'){
             if(rg(value)){
-                this.setState({messageNoValidoGENERO: ''})
+                this.setState({messageNoValidoRG: ''})
             }else {
                 this.setState({messageNoValidoRG: 'RG INVALIDO'})
+            }
+        }
+        if(name === 'emissao'){
+            if(emissao(value)) {
+                this.setState({messageNoValidoEMISSAO: ''})
+            }else {
+                this.setState({messageNoValidoEMISSAO: 'DATA INVALADA'})
+            }
+        }
+        if(name === 'ufdoc'){
+            if(this.state.ufdoc === '' || this.state.ufdoc === 'selected' ){
+                this.setState({messageNoValidoUFDOC: 'ESCOLHA UMA OPÇÂO'})
+            }else {
+                this.setState({messageNoValidoUFDOC: ''})
+            }
+        }
+        if(name === 'uf'){
+            if(this.state.uf === '' || this.state.uf === 'selected' ){
+                this.setState({messageNoValidoUF: 'ESCOLHA UMA OPÇÂO'})
+            }else {
+                this.setState({messageNoValidoUF: ''})
             }
         }
         
@@ -183,11 +210,29 @@ class Form1 extends React.Component {
                 this.setState({[name]: ''})
             }
         }
+        if(name === 'emissao'){
+            if(emissao(value)){
+                this.setState({messageNoValidoEMISSAO: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
+        }
+        if(name === 'ufdoc'){
+            this.setState({[name]: value})
+        }
+        if(name === 'uf'){
+            this.setState({[name]: value})
+        }
         
 
     }
     handleSubmitProx(e) {
         console.log(this.state)
+        /* var arr = this.state.messageNoValidoPRAZO(function(obj){
+            return Object.keys(obj).map(function(key{ }))
+        }) */
         /* pagina 1 */
         if(this.state.cpf !== ''){
             if(this.state.telefone !== ''){
@@ -217,8 +262,8 @@ class Form1 extends React.Component {
         e.preventDefault()
     }
     handleSubmitEnv(e) {
-        const { cpf, telefone, nasc, moto, entrada, prazo, nome, genero } = this.state
-        alert(`CPF : ${cpf} , telefone : ${telefone}, nascimento : ${nasc}, Moto, ${moto} Entrada: ${entrada}, Prazo : ${prazo}, Nome: ${nome}`)
+        
+        alert(this.state)
         e.preventDefault()
     }
 
@@ -319,38 +364,82 @@ class Form1 extends React.Component {
                        <label className="placeholder" htmlFor="firsname">RG</label>
                        <div className="error">{this.state.messageNoValidoRG}</div>
                    </div>
+                   {/* DATA DE EMISSAO */}
                    <div className="input-container ic2">
-                       <select name="moto" id="" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
+                       <input name="emissao" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="date" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Data de emissão</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoEMISSAO}</div>
+                   </div>
+                   {/* UF Documento */}
+                   <div className="input-container ic2">
+                       <select name="ufdoc" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
                            <option value="selected"></option>
-                           <option value="Meteor 350 Fireball">Meteor 350 Fireball</option>
-                           <option value="Meteor 350 Stellar">Meteor 350 Stellar</option>
-                           <option value="Meteor 350 Supernova">Meteor 350 Supernova</option>
-                           <option value="Himalayan">Himalayan 411</option>
-                           <option value="Interceptor">Interceptor 650</option>
-                           <option value="Continental">Continental 650</option>
+                           <option value="AC">Acre - AC</option>
+                           <option value="AL">Alagoas - AL</option>
+                           <option value="AM">Amazonas- AM</option>
+                           <option value="AP">Amapá - AP</option>
+                           <option value="BA">Bahia - BA</option>
+                           <option value="CE">Cearà - CE</option>
+                           <option value="DF">Distrito Federal - DF</option>
+                           <option value="ES">Espírito Santo - ES</option>
+                           <option value="GO">Goias - GO</option>
+                           <option value="MA">Maranhão- MA</option>
+                           <option value="MG">Minas Gerais - MG</option>
+                           <option value="MS">Mato Grosso do Sul - MS</option>
+                           <option value="MT">Mato Grosso - MT</option>
+                           <option value="PA">Pará - PA</option>
+                           <option value="PR">Paraíba - PR</option>
+                           <option value="PE">Pernambuco - PE</option>
+                           <option value="PR">Paraná - PR</option>
+                           <option value="RJ">Rio de Janeiro - RJ</option>
+                           <option value="RN">Rio Grande do Norte - RN</option>
+                           <option value="RO">Rondônia - RO</option>
+                           <option value="RR">Roraima - RR</option>
+                           <option value="RS">Rio Grande do Sul - RS</option>
+                           <option value="SC">Santa Catarina - SC</option>
+                           <option value="SE">Sergipe - SE</option>
+                           <option value="SP">São Paulo - SP </option>
+                           <option value="TO">Tocantins - TO</option>
                        </select>
                        <div className="cut"></div>
-                       <label className="placeholder" htmlFor="firsname">Moto</label>
-                       <div className="error messageNaoValido">{this.state.messageNoValidoMOTO}</div>
+                       <label className="placeholder" htmlFor="firsname">UF Documento</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoUFDOC}</div>
                    </div>
+                   {/* UF */}
                    <div className="input-container ic2">
-                       <input name="entrada" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
-                       <div className="cut"></div>
-                       <label className="placeholder" htmlFor="firsname">Entrada</label>
-                       <div className="error messageNaoValido">{this.state.messageNoValidoENTRADA}</div>
-                   </div>
-                   <div className="input-container ic2">
-                       <select name="prazo" id=""onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
+                       <select name="uf" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
                            <option value="selected"></option>
-                           <option value="60">60x</option>
-                           <option value="48">48x</option>
-                           <option value="24">24x</option>
-                           <option value="12">12x</option>
+                           <option value="AC">AC</option>
+                           <option value="AL">AL</option>
+                           <option value="AM">AM</option>
+                           <option value="AP">AP</option>
+                           <option value="BA">BA</option>
+                           <option value="CE">CE</option>
+                           <option value="DF">DF</option>
+                           <option value="ES">ES</option>
+                           <option value="GO">GO</option>
+                           <option value="MA">MA</option>
+                           <option value="MG">MG</option>
+                           <option value="MS">MS</option>
+                           <option value="MT">MT</option>
+                           <option value="PA">PA</option>
+                           <option value="PR">PR</option>
+                           <option value="PE">PE</option>
+                           <option value="PR">PR</option>
+                           <option value="RJ">RJ</option>
+                           <option value="RN">RN</option>
+                           <option value="RO">RO</option>
+                           <option value="RR">RR</option>
+                           <option value="R$">RS</option>
+                           <option value="SC">SC</option>
+                           <option value="SE">SE</option>
+                           <option value="SP">SP </option>
+                           <option value="TO">TO</option>
                        </select>
                        <div className="cut"></div>
-                       <label className="placeholder" htmlFor="firsname">Prazo</label>
-                       <div className="error messageNaoValido">{this.state.messageNoValidoPRAZO}</div>
-                       <button type="submit" className="submit">Proximo</button>
+                       <label className="placeholder" htmlFor="firsname">UF</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoUF}</div>
                    </div>
                 
                 </form>

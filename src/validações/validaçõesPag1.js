@@ -58,14 +58,10 @@ function entrada(value) {
     const upperCase = value.search(RegExp('[A-Z]')) > -1
     const temCaract = value.search(RegExp('[!@#$%^&*()-+]')) > -1
     
-    if(!lowCase) {
-        if(!upperCase){
-            if(!temCaract){
-                if(value > 1500) {
-                    return true
-                }
-            }
-        }
+    if(!lowCase && !upperCase && !temCaract) {
+        if(value > 1500) {
+            return true
+        }      
     }else{
         return false
     }

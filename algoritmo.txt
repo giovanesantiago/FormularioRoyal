@@ -22,8 +22,7 @@ Pagina 2
     Nome Completo 
     Genero ( Select )
         [] Masculino [] Feminino 
-    
-    RG
+    RG 
     Data de Emissão 
     UF Documento ( select ) 
         Options :
@@ -34,7 +33,6 @@ Pagina 2
             Bahia - BA
             Cearà - CE
             Distrito Federal - DF
-            Espírito Santo - ES
             Goias - GO
             Maranhão- MA
             Minas Gerais - MG
@@ -138,7 +136,7 @@ Pagina 4
 [] O cliente autoriza a consulta de eventuais informações a seu respeito mantidas no sistema de informações de crédito organizado pelo Banco Central do Brasil
 
 # Tratamento de dados
-
+OBS : Pesquisa como transformar um objeto em uma array so com os valores, para utilizar o for, na forma de remover todos os if do HandleProx
 Onchange{
     Validação e gravar dados na array state
 }
