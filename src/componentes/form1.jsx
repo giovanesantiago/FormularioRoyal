@@ -2,7 +2,7 @@ import React from "react"
 import { ReactDOM } from "react"
 import style from "../css/style.css"
 import { cpf, tel, nasc, entrada } from "../validações/validaçõesPag1"
-import { nome, rg, emissao } from "../validações/validaçõesPag2"
+import { nome, rg, emissao, naturalidade } from "../validações/validaçõesPag2"
 
 
 
@@ -34,6 +34,8 @@ class Form1 extends React.Component {
             messageNoValidoUFDOC: '',
             uf: '',
             messageNoValidoUF: '',
+            naturalidade: '',
+            messageNoValidoNATURALIDADE: '',
             
         }
 
@@ -136,7 +138,13 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoUF: ''})
             }
         }
-        
+        if(name === 'naturalidade'){
+            if(naturalidade(value) && value !== ''){
+                this.setState({messageNoValidoNATURALIDADE: ''})
+            }else{
+                this.setState({messageNoValidoNATURALIDADE: 'NATURALIDADE INVALIDA'})
+            }
+        }
     }
 
     handleOnChange(e) {
@@ -224,6 +232,15 @@ class Form1 extends React.Component {
         }
         if(name === 'uf'){
             this.setState({[name]: value})
+        }
+        if(name === 'naturalidade'){
+            if(naturalidade(value)){
+                this.setState({messageNoValidoNATURALIDADE: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
         }
         
 
@@ -440,6 +457,13 @@ class Form1 extends React.Component {
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">UF</label>
                        <div className="error messageNaoValido">{this.state.messageNoValidoUF}</div>
+                   </div>
+                   {/* NATURALIDADE */}
+                   <div className="input-container ic1">
+                       <input name="naturalidade" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Naturalidade</label>
+                       <div className="error">{this.state.messageNoValidoNATURALIDADE}</div>
                    </div>
                 
                 </form>

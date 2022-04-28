@@ -51,7 +51,6 @@ Pagina 2
             Sergipe - SE
             São Paulo - SP 
             Tocantins - TO
-
     UF ( Select )
         Options :
             AC
@@ -80,6 +79,7 @@ Pagina 2
             SP
             TO
     Naturalidade
+
     Email 
     Nome Da Mae
     Nome Do Pai
@@ -137,6 +137,7 @@ Pagina 4
 
 # Tratamento de dados
 OBS : Pesquisa como transformar um objeto em uma array so com os valores, para utilizar o for, na forma de remover todos os if do HandleProx
+se não conseguir refazer com switch
 Onchange{
     Validação e gravar dados na array state
 }

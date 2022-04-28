@@ -33,4 +33,15 @@ function emissao(value){
     }
 }
 
-export { nome, rg, emissao }
+function naturalidade(value) {
+    const temNumero = value.search(RegExp('[0-9]')) > -1
+    const temCaract = value.search(RegExp('[.!@#$%^&*()-+]')) > -1
+
+    if(!temCaract && !temNumero) {
+        return true
+    }else {
+        return false
+    }
+}
+
+export { nome, rg, emissao, naturalidade }
