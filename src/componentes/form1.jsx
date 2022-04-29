@@ -2,7 +2,7 @@ import React from "react"
 import { ReactDOM } from "react"
 import style from "../css/style.css"
 import { cpf, tel, nasc, entrada } from "../validações/validaçõesPag1"
-import { nome, rg, emissao, naturalidade } from "../validações/validaçõesPag2"
+import { nome, rg, emissao, naturalidade, email } from "../validações/validaçõesPag2"
 
 
 
@@ -36,6 +36,8 @@ class Form1 extends React.Component {
             messageNoValidoUF: '',
             naturalidade: '',
             messageNoValidoNATURALIDADE: '',
+            email: '',
+            messageNoValidoEMAIL: ''
             
         }
 
@@ -145,6 +147,14 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoNATURALIDADE: 'NATURALIDADE INVALIDA'})
             }
         }
+        if(name === 'email'){
+            
+            if(email(value)){
+                this.setState({messageNoValidoEMAIL: ''})
+            }else{
+                this.setState({messageNoValidoEMAIL: 'EMAIL INVALIDO'})
+            }
+        }
     }
 
     handleOnChange(e) {
@@ -236,6 +246,15 @@ class Form1 extends React.Component {
         if(name === 'naturalidade'){
             if(naturalidade(value)){
                 this.setState({messageNoValidoNATURALIDADE: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
+        }
+        if(name === 'email'){
+            if(email(value)){
+                this.setState({messageNoValidoEMAIL: ''})
                 this.setState({[name]: value})
                 console.log(value)
             }else{
@@ -354,7 +373,6 @@ class Form1 extends React.Component {
                 </form>
                 {/* Pagina2 */}
                 <form id="form2" onSubmit={this.handleSubmitProx} className="form form2">
-                    <div className="title">Pefeito,</div>
                     <div className="subtitle">Vamos continuar ...</div>
                     {/* NOME */}
                    <div className="input-container ic1">
@@ -465,7 +483,13 @@ class Form1 extends React.Component {
                        <label className="placeholder" htmlFor="firsname">Naturalidade</label>
                        <div className="error">{this.state.messageNoValidoNATURALIDADE}</div>
                    </div>
-                
+                   {/* email */}
+                   <div className="input-container ic1">
+                       <input name="email" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Email</label>
+                       <div className="error">{this.state.messageNoValidoEMAIL}</div>
+                   </div>
                 </form>
             </div>
         )

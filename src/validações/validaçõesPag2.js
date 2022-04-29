@@ -44,4 +44,14 @@ function naturalidade(value) {
     }
 }
 
-export { nome, rg, emissao, naturalidade }
+function email(value){
+    const temCaract = value.search('@') > -1
+    const pontoCom = value.search('.com') > -1
+    if(value !== '' && temCaract && pontoCom) {
+        return true
+    } else {
+        return false
+    }
+}
+
+export { nome, rg, emissao, naturalidade, email }
