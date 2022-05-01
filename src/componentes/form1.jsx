@@ -37,7 +37,11 @@ class Form1 extends React.Component {
             naturalidade: '',
             messageNoValidoNATURALIDADE: '',
             email: '',
-            messageNoValidoEMAIL: ''
+            messageNoValidoEMAIL: '',
+            mae: '',
+            messageNoValidoMAE: '',
+            pai: '',
+            messageNoValidoPAI: '',
             
         }
 
@@ -155,6 +159,20 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoEMAIL: 'EMAIL INVALIDO'})
             }
         }
+        if(name === 'mae'){
+            if(nome(value)){
+                this.setState({messageNoValidoMAE: ''})
+            }else{
+                this.setState({messageNoValidoMAE: 'NOME INVALIDO'})
+            }
+        }
+        if(name === 'pai'){
+            if(nome(value)){
+                this.setState({messageNoValidoPAI: ''})
+            }else{
+                this.setState({messageNoValidoPAI: 'NOME INVALIDO'})
+            }
+        }
     }
 
     handleOnChange(e) {
@@ -255,6 +273,24 @@ class Form1 extends React.Component {
         if(name === 'email'){
             if(email(value)){
                 this.setState({messageNoValidoEMAIL: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
+        }
+        if(name === 'mae'){
+            if(nome(value)){
+                this.setState({messageNoValidoMAE: ''})
+                this.setState({[name]: value})
+                console.log(value)
+            }else{
+                this.setState({[name]: ''})
+            }
+        }
+        if(name === 'pai'){
+            if(nome(value)){
+                this.setState({messageNoValidoPAI: ''})
                 this.setState({[name]: value})
                 console.log(value)
             }else{
@@ -490,6 +526,21 @@ class Form1 extends React.Component {
                        <label className="placeholder" htmlFor="firsname">Email</label>
                        <div className="error">{this.state.messageNoValidoEMAIL}</div>
                    </div>
+                   {/* mae */}
+                   <div className="input-container ic1">
+                       <input name="mae" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Nome da Mãe</label>
+                       <div className="error">{this.state.messageNoValidoMAE}</div>
+                   </div>
+                   {/* pai */}
+                   <div className="input-container ic1">
+                       <input name="pai" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Nome da Pai</label>
+                       <div className="error">{this.state.messageNoValidoPAI}</div>
+                   </div>
+                   <button type="submit" className="submit">Proximo</button>
                 </form>
             </div>
         )
