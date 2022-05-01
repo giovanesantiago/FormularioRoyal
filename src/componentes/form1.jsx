@@ -10,6 +10,7 @@ class Form1 extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
+            /* pagina 1  */
             cpf: '',
             messageNoValidoCPF: '',
             telefone: '',
@@ -22,6 +23,7 @@ class Form1 extends React.Component {
             messageNoValidoENTRADA: '',
             prazo: '', 
             messageNoValidoPRAZO: '',
+            /* pagina 2 */
             nome: '',
             messageNoValidoNOME: '',
             genero: '',
@@ -42,6 +44,11 @@ class Form1 extends React.Component {
             messageNoValidoMAE: '',
             pai: '',
             messageNoValidoPAI: '',
+            /* pagina 3 */
+            cargo: '',
+            messageNoValidoCARGO: '',
+            profissao: '',
+            messageNoValidoPROFISSAO: '',
             
         }
 
@@ -173,6 +180,31 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoPAI: 'NOME INVALIDO'})
             }
         }
+        /* Pagina 3 */
+        if(name === 'cargo') {
+            if(this.state.cargo === '' || this.state.cargo === 'selected' ){
+                this.setState({messageNoValidoCARGO: 'ESCOLHA UMA OPÇÂO'})
+            }else if(this.state.cargo === 'aposentado') {
+                console.log("display on : Nome Da Instituição")
+                this.setState({messageNoValidoCARGO: ''})
+            }else if(this.state.cargo === 'assalariado') {
+                console.log("display on : Nome da Empresa - Data de Admissão")
+                this.setState({messageNoValidoCARGO: ''})
+            }else if(this.state.cargo === 'empresario') {
+                console.log("display on : CNPJ - Nome Da Empresa - Data de Abertura")
+                this.setState({messageNoValidoCARGO: ''})
+            }else if(this.state.cargo === 'funcionariopublico') {
+                console.log("display on : Nome da Empresa - Data de Admissão")
+                this.setState({messageNoValidoCARGO: ''})
+            }
+        }
+        if(name === 'profissao'){
+            if(this.state.profissao === ''){
+                this.setState({messageNoValidoPROFISSAO: 'PROFISSÃO INVALIDA'})
+            }else {
+                this.setState({messageNoValidoPROFISSAO: ''})
+            }
+        }
     }
 
     handleOnChange(e) {
@@ -297,7 +329,15 @@ class Form1 extends React.Component {
                 this.setState({[name]: ''})
             }
         }
-        
+        /* PAGINA 3 */
+        if(name === 'cargo') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
+        if(name === 'profissao') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
 
     }
     handleSubmitProx(e) {
@@ -539,6 +579,35 @@ class Form1 extends React.Component {
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">Nome da Pai</label>
                        <div className="error">{this.state.messageNoValidoPAI}</div>
+                   </div>
+                   <button type="submit" className="submit">Proximo</button>
+                </form>
+                {/* Pagina 3 */}
+                <form id="form3" onSubmit={this.handleSubmitProx} className="form form3">
+                    <div className="subtitle">Agora preencha seus dados profissionais...</div>
+                    {/* cargo */}
+                    <div className="input-container ic2">
+                       <select name="cargo" id="cargo" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
+                           <option value="selected"></option>
+                           <option value="aposentado">Aposentado</option>
+                           <option value="assalariado">Assalariado</option>
+                           <option value="autonomo">Autônomo</option>
+                           <option value="funcionariopublico">Funcionário Público</option>
+                           <option value="produtorrural">Produtor Rural</option>
+                           <option value="profissionalliberal">Profissional Liberal</option>
+                           <option value="empresario">Empresário</option>
+                           <option value="outros">Outros</option>
+                       </select>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Cargo</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoCARGO}</div>
+                   </div>
+                   {/* Profissão */}
+                   <div className="input-container ic1">
+                       <input name="profissao" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Profissão</label>
+                       <div className="error">{this.state.messageNoValidoPROFISSAO}</div>
                    </div>
                    <button type="submit" className="submit">Proximo</button>
                 </form>
