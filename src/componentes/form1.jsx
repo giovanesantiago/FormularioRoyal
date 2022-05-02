@@ -3,6 +3,8 @@ import { ReactDOM } from "react"
 import style from "../css/style.css"
 import { cpf, tel, nasc, entrada } from "../validações/validaçõesPag1"
 import { nome, rg, emissao, naturalidade, email } from "../validações/validaçõesPag2"
+import { cnpj } from "../validações/validaçõesPag3"
+import {Aposentado, Assalariado, Empresario} from "./cargos/cargos"
 
 
 
@@ -49,8 +51,18 @@ class Form1 extends React.Component {
             messageNoValidoCARGO: '',
             profissao: '',
             messageNoValidoPROFISSAO: '',
+            instituicao: '',
+            messageNoValidoINSTITUICAO: '',
+            cnpj: '',
+            messageNoValidoCNPJ: '',
+            empresa: '',
+            messageNoValidoEMPRESA: '',
+            admissao: '',
+            messageNoValidoADMISSAO: '',
+            estadoCargo: [],
             
         }
+        
 
         this.handleOnChange = this.handleOnChange.bind(this)
         this.handleOnblur = this.handleOnblur.bind(this)
@@ -184,14 +196,15 @@ class Form1 extends React.Component {
         if(name === 'cargo') {
             if(this.state.cargo === '' || this.state.cargo === 'selected' ){
                 this.setState({messageNoValidoCARGO: 'ESCOLHA UMA OPÇÂO'})
+                this.setState({estadoCargo: []})
             }else if(this.state.cargo === 'aposentado') {
-                console.log("display on : Nome Da Instituição")
                 this.setState({messageNoValidoCARGO: ''})
+                this.setState({estadoCargo: [<Aposentado change={this.handleOnChange} blur={this.handleOnblur} message={this.state.messageNoValidoINSTITUICAO}/>]})
             }else if(this.state.cargo === 'assalariado') {
-                console.log("display on : Nome da Empresa - Data de Admissão")
+                this.setState({estadoCargo: [<Assalariado change={this.handleOnChange} blur={this.handleOnblur} message1={this.state.messageNoValidoEMPRESA} message2={this.state.messageNoValidoADMISSAO}/>]})
                 this.setState({messageNoValidoCARGO: ''})
             }else if(this.state.cargo === 'empresario') {
-                console.log("display on : CNPJ - Nome Da Empresa - Data de Abertura")
+                this.setState({estadoCargo: [<Empresario change={this.handleOnChange} blur={this.handleOnblur} message1={this.state.messageNoValidoCNPJ} message2={this.state.messageNoValidoEMPRESA} message3={this.state.messageNoValidoADMISSAO}/>]})
                 this.setState({messageNoValidoCARGO: ''})
             }else if(this.state.cargo === 'funcionariopublico') {
                 console.log("display on : Nome da Empresa - Data de Admissão")
@@ -204,6 +217,37 @@ class Form1 extends React.Component {
             }else {
                 this.setState({messageNoValidoPROFISSAO: ''})
             }
+        }
+        if(name === 'instituicao'){
+            if(this.state.instituicao === ''){
+                this.setState({messageNoValidoINSTITUICAO: 'INSTITUIÇÃO INVALIDA'})  
+            }else {
+                console.log(this.state.instituicao)
+                this.setState({messageNoValidoINSTITUICAO: ''})
+            }
+        }
+        if(name === 'empresa'){
+            if(this.state.empresa === ''){
+                this.setState({messageNoValidoEMPRESA: 'EMPRESA INVALIDA'})  
+            }else {
+                this.setState({messageNoValidoEMPRESA: ''})
+            }
+        }
+        if(name === 'admissao'){
+            if(this.state.admissao === ''){
+                this.setState({messageNoValidoADMISSAO: 'ADMISSAO INVALIDA'})  
+            }else {
+                this.setState({messageNoValidoADMISSAO: ''})
+            }
+        }
+        if(name === 'cnpj') {
+            if (cnpj(value)) {
+                this.setState({messageNoValidoCNPJ: ''})
+                console.log('ok')
+            }else {
+                this.setState({messageNoValidoCNPJ: 'CPF INVALIDO'}) 
+                console.log('nao ok')
+            } 
         }
     }
 
@@ -338,15 +382,34 @@ class Form1 extends React.Component {
             this.setState({[name]: value})
             console.log(value)
         }
+        if(name === 'instituicao') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
+        if(name === 'empresa') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
+        if(name === 'admissao') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
+        if(name === 'cnpj') {
+            if (cnpj(value)) {
+                this.setState({messageNoValidoCNPJ: ''})
+                this.setState({[name]: value})
+            }else {
+                this.setState({[name]: ''}) 
+            } 
+        }
 
     }
+
     handleSubmitProx(e) {
         console.log(this.state)
-        /* var arr = this.state.messageNoValidoPRAZO(function(obj){
-            return Object.keys(obj).map(function(key{ }))
-        }) */
+        
         /* pagina 1 */
-        if(this.state.cpf !== ''){
+       /*  if(this.state.cpf !== ''){
             if(this.state.telefone !== ''){
                 if(this.state.nasc !== ''){
                     if(this.state.moto !== ''){
@@ -370,7 +433,7 @@ class Form1 extends React.Component {
             }
         }else{
             alert('Cadastro Invalido, verifique informações')
-        }
+        } */
         e.preventDefault()
     }
     handleSubmitEnv(e) {
@@ -609,6 +672,7 @@ class Form1 extends React.Component {
                        <label className="placeholder" htmlFor="firsname">Profissão</label>
                        <div className="error">{this.state.messageNoValidoPROFISSAO}</div>
                    </div>
+                   <div>{this.state.estadoCargo[0]}</div>
                    <button type="submit" className="submit">Proximo</button>
                 </form>
             </div>
