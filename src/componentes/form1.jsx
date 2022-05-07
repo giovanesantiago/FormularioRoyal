@@ -60,6 +60,8 @@ class Form1 extends React.Component {
             admissao: '',
             messageNoValidoADMISSAO: '',
             estadoCargo: [],
+            telcomercial: '',
+            messageNoValidoTELCOMERCIAL: '',
             
         }
         
@@ -207,7 +209,7 @@ class Form1 extends React.Component {
                 this.setState({estadoCargo: [<Empresario change={this.handleOnChange} blur={this.handleOnblur} message1={this.state.messageNoValidoCNPJ} message2={this.state.messageNoValidoEMPRESA} message3={this.state.messageNoValidoADMISSAO}/>]})
                 this.setState({messageNoValidoCARGO: ''})
             }else if(this.state.cargo === 'funcionariopublico') {
-                console.log("display on : Nome da Empresa - Data de Admissão")
+                this.setState({estadoCargo: [<Assalariado change={this.handleOnChange} blur={this.handleOnblur} message1={this.state.messageNoValidoEMPRESA} message2={this.state.messageNoValidoADMISSAO}/>]})
                 this.setState({messageNoValidoCARGO: ''})
             }
         }
@@ -248,6 +250,14 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoCNPJ: 'CPF INVALIDO'}) 
                 console.log('nao ok')
             } 
+        }
+        if(name === 'telcomercial') {
+            
+            if(tel(value)){
+                this.setState({messageNoValidoTELCOMERCIAL: ''})
+            }else{
+                this.setState({messageNoValidoTELCOMERCIAL: 'TELEFONE INVALIDO'})
+            }
         }
     }
 
@@ -401,6 +411,15 @@ class Form1 extends React.Component {
             }else {
                 this.setState({[name]: ''}) 
             } 
+        }
+        if(name === 'telcomercial') {
+            
+            if(tel(value)){
+                this.setState({[name]: value})
+                this.setState({messageNoValidoTEL: ''})
+            }else{
+                this.setState({[name]: ''})
+            }
         }
 
     }
@@ -673,6 +692,13 @@ class Form1 extends React.Component {
                        <div className="error">{this.state.messageNoValidoPROFISSAO}</div>
                    </div>
                    <div>{this.state.estadoCargo[0]}</div>
+                   {/* TELEFONE COMERCIAL */}
+                   <div className="input-container ic2">
+                       <input name="telcomercial" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Telefone Comercial</label>
+                       <div className="error">{this.state.messageNoValidoTELCOMERCIAL}</div>
+                   </div>
                    <button type="submit" className="submit">Proximo</button>
                 </form>
             </div>
