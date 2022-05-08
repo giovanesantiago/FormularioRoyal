@@ -62,6 +62,8 @@ class Form1 extends React.Component {
             estadoCargo: [],
             telcomercial: '',
             messageNoValidoTELCOMERCIAL: '',
+            renda: '',
+            messageNoValidoRENDA: '',
             
         }
         
@@ -259,6 +261,13 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoTELCOMERCIAL: 'TELEFONE INVALIDO'})
             }
         }
+        if(name === 'renda'){
+            if(entrada(value)){
+                this.setState({messageNoValidoRENDA: ''})
+            }else{
+                this.setState({messageNoValidoRENDA: 'RENDA INVALIDA'})
+            }
+        }
     }
 
     handleOnChange(e) {
@@ -419,6 +428,15 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoTEL: ''})
             }else{
                 this.setState({[name]: ''})
+            }
+        }
+        if(name === 'renda'){
+            if(entrada(value)){
+                this.setState({messageNoValidoRENDA: ''})
+                this.setState({[name]: value})
+            }else{
+                this.setState({[name]: ''})
+                
             }
         }
 
@@ -699,6 +717,13 @@ class Form1 extends React.Component {
                        <label className="placeholder" htmlFor="firsname">Telefone Comercial</label>
                        <div className="error">{this.state.messageNoValidoTELCOMERCIAL}</div>
                    </div>
+                   {/* RENDA */}
+                   <div className="input-container ic2">
+                       <input name="renda" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Renda</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoRENDA}</div>
+                   </div>                  
                    <button type="submit" className="submit">Proximo</button>
                 </form>
             </div>

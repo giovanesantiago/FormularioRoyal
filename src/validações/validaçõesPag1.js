@@ -59,7 +59,7 @@ function entrada(value) {
     const temCaract = value.search(RegExp('[!@#$%^&*()-+]')) > -1
     
     if(!lowCase && !upperCase && !temCaract) {
-        if(value > 1500) {
+        if(value > 1000) {
             return true
         }      
     }else{
