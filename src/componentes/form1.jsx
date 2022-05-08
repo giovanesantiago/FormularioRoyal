@@ -64,6 +64,8 @@ class Form1 extends React.Component {
             messageNoValidoTELCOMERCIAL: '',
             renda: '',
             messageNoValidoRENDA: '',
+            compRenda: '',
+            messageNoValidoCOMPRENDA: '',
             
         }
         
@@ -268,6 +270,13 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoRENDA: 'RENDA INVALIDA'})
             }
         }
+        if(name === 'compRenda'){
+            if(this.state.compRenda === '' || this.state.compRenda === 'selected' ){
+                this.setState({messageNoValidoCOMPRENDA: 'ESCOLHA UMA OPÇÂO'})
+            }else {
+                this.setState({messageNoValidoCOMPRENDA: ''})
+            }
+        }
     }
 
     handleOnChange(e) {
@@ -438,6 +447,9 @@ class Form1 extends React.Component {
                 this.setState({[name]: ''})
                 
             }
+        }
+        if(name === 'compRenda'){
+            this.setState({[name]: value})
         }
 
     }
@@ -723,6 +735,21 @@ class Form1 extends React.Component {
                        <div className="cut"></div>
                        <label className="placeholder" htmlFor="firsname">Renda</label>
                        <div className="error messageNaoValido">{this.state.messageNoValidoRENDA}</div>
+                   </div>
+                   {/* COMPROVANTE DE RENDA */}
+                   <div className="input-container ic2">
+                       <select name="compRenda" id="compRenda" onChange={this.handleOnChange} onBlur={this.handleOnblur}  className="input" placeholder=" ">
+                           <option value="selected"></option>
+                           <option value="CRM/CRO">CRM/CRO</option>
+                           <option value="Extrato Bancário">Extrato Bancário</option>
+                           <option value="Extrato INSS (consulta interna)">Extrato INSS (consulta interna)</option>
+                           <option value="Holerite/Contra-Cheque">Holerite/Contra-Cheque</option>
+                           <option value="IRRE">IRRE</option>
+                           <option value="Não apresentou comprovante">Não apresentou comprovante</option>
+                       </select>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Comprovante de Renda</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoCOMPRENDA}</div>
                    </div>                  
                    <button type="submit" className="submit">Proximo</button>
                 </form>

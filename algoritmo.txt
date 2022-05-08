@@ -112,11 +112,9 @@ Pagina 3
             Produtor Rural
             Profissional Liberal
     Profissão 
---- Corrigir messagem de não valido !
     Tel Comercial
-
     Renda
-    Patrimonio
+
     Comprovante de Renda ( Select )
         CRM/CRO
         Extrato Bancário
@@ -150,6 +148,8 @@ Onsubmit pagina 1 {
 #Saida de dados
 Enviar para email atraves do emailJS
 
+# Correção de Bugs
+--- Corrigir messagem de não valido na pagina 3
 
         
 
