@@ -135,6 +135,8 @@ Pagina 4
 
 [] O cliente autoriza a consulta de eventuais informações a seu respeito mantidas no sistema de informações de crédito organizado pelo Banco Central do Brasil
 
+--- validações de cnpj
+
 # Tratamento de dados
 OBS : Pesquisa como transformar um objeto em uma array so com os valores, para utilizar o for, na forma de remover todos os if do HandleProx
 se não conseguir refazer com switch
@@ -149,7 +151,9 @@ Onsubmit pagina 1 {
 Enviar para email atraves do emailJS
 
 # Correção de Bugs
+
 --- Corrigir messagem de não valido na pagina 3
+--- Corrigir mudança de inputs remover inputs
 
         
 

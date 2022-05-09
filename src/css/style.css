@@ -19,7 +19,7 @@ body {
   }
 
   .form2 {
-    margin-top: 200px;
+    margin-top: 300px;
     margin-bottom: 100px;
     height: 1700px;
   }
@@ -275,4 +275,8 @@ body {
   float: right;
   color: #dc2f55;
   font-style: italic;
+}
+
+.none {
+  display: none;
 }

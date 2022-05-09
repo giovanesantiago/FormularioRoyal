@@ -1,10 +1,12 @@
 import React from "react"
 import { ReactDOM } from "react"
+import emailjs from '@emailjs/browser'
 import style from "../css/style.css"
 import { cpf, tel, nasc, entrada } from "../validações/validaçõesPag1"
 import { nome, rg, emissao, naturalidade, email } from "../validações/validaçõesPag2"
 import { cnpj } from "../validações/validaçõesPag3"
-import {Aposentado, Assalariado, Empresario} from "./cargos/cargos"
+import { Aposentado, Assalariado, Empresario } from "./cargos/cargos"
+import { cep, preencher } from "../validações/validaçõesPag4"
 
 
 
@@ -66,6 +68,22 @@ class Form1 extends React.Component {
             messageNoValidoRENDA: '',
             compRenda: '',
             messageNoValidoCOMPRENDA: '',
+            /* Pagina 4 */
+            cep: '',
+            messageNoValidoCEP: '',
+            rua: '',
+            messageNoValidoRUA: '',
+            nCasa: '',
+            messageNoValidoNCASA: '',
+            complemento: '',
+            estado: '',
+            messageNoValidoESTADO: '',
+            cidade: '',
+            messageNoValidoCIDADE: '',
+            bairro: '',
+            messageNoValidoBAIRRO: '',
+
+
             
         }
         
@@ -249,10 +267,8 @@ class Form1 extends React.Component {
         if(name === 'cnpj') {
             if (cnpj(value)) {
                 this.setState({messageNoValidoCNPJ: ''})
-                console.log('ok')
             }else {
                 this.setState({messageNoValidoCNPJ: 'CPF INVALIDO'}) 
-                console.log('nao ok')
             } 
         }
         if(name === 'telcomercial') {
@@ -277,9 +293,53 @@ class Form1 extends React.Component {
                 this.setState({messageNoValidoCOMPRENDA: ''})
             }
         }
+        if(name === 'cep') {
+            if (cep(value)) {
+                this.setState({messageNoValidoCEP: ''})
+            }else {
+                this.setState({messageNoValidoCEP: 'CEP INVALIDO'}) 
+            } 
+        }
+        if(name === 'rua') {
+            this.setState({[name]: value})
+            console.log(value)
+        }
+        if(name === 'nCasa'){
+            if(this.state.nCasa === ''){
+                this.setState({messageNoValidoNCASA: 'NUMERO INVALIDO'})  
+            }else {
+                this.setState({messageNoValidoNCASA: ''})
+                
+            }
+        }
+        if(name === 'estado'){
+            if(this.state.estado === ''){
+                this.setState({messageNoValidoESTADO: 'ESTADO INVALIDO'})  
+            }else {
+                this.setState({messageNoValidoESTADO: ''})
+                
+            }
+        }
+        if(name === 'cidade'){
+            if(this.state.cidade === ''){
+                this.setState({messageNoValidoCIDADE: 'CIDADE INVALIDA'})  
+            }else {
+                this.setState({messageNoValidoCIDADE: ''})
+                
+            }
+        }
+        if(name === 'bairro'){
+            if(this.state.bairro === ''){
+                this.setState({messageNoValidoBAIRRO: 'BAIRRO INVALIDA'})  
+            }else {
+                this.setState({messageNoValidoBAIRRO: ''})
+                
+            }
+        }
     }
 
     handleOnChange(e) {
+        
         const target = e.target
         const name = target.name
         const value = target.value
@@ -332,20 +392,19 @@ class Form1 extends React.Component {
             if(nome(value)){
                 this.setState({messageNoValidoNOME: ''})
                 this.setState({[name]: value})
-                console.log(value)
             }else{
                 this.setState({[name]: ''})
             }
         }
         if(name === 'genero') {
             this.setState({[name]: value})
-            console.log(value)
+            
         }
         if(name === 'rg'){
             if(rg(value)){
                 this.setState({messageNoValidoRG: ''})
                 this.setState({[name]: value})
-                console.log(value)
+                
             }else{
                 this.setState({[name]: ''})
             }
@@ -354,7 +413,7 @@ class Form1 extends React.Component {
             if(emissao(value)){
                 this.setState({messageNoValidoEMISSAO: ''})
                 this.setState({[name]: value})
-                console.log(value)
+                
             }else{
                 this.setState({[name]: ''})
             }
@@ -369,7 +428,7 @@ class Form1 extends React.Component {
             if(naturalidade(value)){
                 this.setState({messageNoValidoNATURALIDADE: ''})
                 this.setState({[name]: value})
-                console.log(value)
+                
             }else{
                 this.setState({[name]: ''})
             }
@@ -378,7 +437,7 @@ class Form1 extends React.Component {
             if(email(value)){
                 this.setState({messageNoValidoEMAIL: ''})
                 this.setState({[name]: value})
-                console.log(value)
+                
             }else{
                 this.setState({[name]: ''})
             }
@@ -387,7 +446,7 @@ class Form1 extends React.Component {
             if(nome(value)){
                 this.setState({messageNoValidoMAE: ''})
                 this.setState({[name]: value})
-                console.log(value)
+                
             }else{
                 this.setState({[name]: ''})
             }
@@ -396,7 +455,7 @@ class Form1 extends React.Component {
             if(nome(value)){
                 this.setState({messageNoValidoPAI: ''})
                 this.setState({[name]: value})
-                console.log(value)
+                
             }else{
                 this.setState({[name]: ''})
             }
@@ -404,23 +463,18 @@ class Form1 extends React.Component {
         /* PAGINA 3 */
         if(name === 'cargo') {
             this.setState({[name]: value})
-            console.log(value)
         }
         if(name === 'profissao') {
             this.setState({[name]: value})
-            console.log(value)
         }
         if(name === 'instituicao') {
             this.setState({[name]: value})
-            console.log(value)
         }
         if(name === 'empresa') {
             this.setState({[name]: value})
-            console.log(value)
         }
         if(name === 'admissao') {
             this.setState({[name]: value})
-            console.log(value)
         }
         if(name === 'cnpj') {
             if (cnpj(value)) {
@@ -451,20 +505,132 @@ class Form1 extends React.Component {
         if(name === 'compRenda'){
             this.setState({[name]: value})
         }
+        /* Pagina 4 */
+        if(name === 'cep') {
+            if (cep(value)) {
+                this.setState({messageNoValidoCEP: ''})
+                this.setState({[name]: value})
+            }else {
+                this.setState({[name]: ''}) 
+            } 
+        }
+        if(name === 'rua') {
+            this.setState({[name]: value})
+        }
+        if(name === 'nCasa') {
+            this.setState({[name]: value})
+            this.setState({rua: document.getElementById('rua').value})
+            this.setState({estado: document.getElementById('uf').value})
+            this.setState({cidade: document.getElementById('cidade').value})
+            this.setState({bairro: document.getElementById('bairro').value})
+        }
+        if(name === 'complemento') {
+            this.setState({[name]: value})
+            
+        }
+        if(name === 'estado') {
+            this.setState({[name]: value})
+            
+        }
+        if(name === 'cidade') {
+            this.setState({[name]: value})
+            
+        }
+        if(name === 'bairro') {
+            this.setState({[name]: value})
+            
+        }
 
     }
 
     handleSubmitProx(e) {
-        console.log(this.state)
-        
-        /* pagina 1 */
-       /*  if(this.state.cpf !== ''){
-            if(this.state.telefone !== ''){
-                if(this.state.nasc !== ''){
-                    if(this.state.moto !== ''){
-                        if(this.state.entrada !== ''){
-                            if(this.state.prazo !== ''){
-                                window.location.href = "#form2"
+        const target = e.target
+        const id = target.id
+        if(id === 'form1'){
+            if(this.state.cpf !== ''){
+                if(this.state.telefone !== ''){
+                    if(this.state.nasc !== ''){
+                        if(this.state.moto !== ''){
+                            if(this.state.entrada !== ''){
+                                if(this.state.prazo !== ''){
+                                    window.location.href = "#form2"
+                                }else{
+                                    alert('Prazo invalido , verifique informações')
+                                    this.setState({messageNoValidoPRAZO: 'ESCOLHA UMA OPÇÂO'})
+
+                                }
+                            }else{
+                                alert('Entrada invalida, verifique informações')
+                                this.setState({messageNoValidoENTRADA: 'ENTRADA INVALIDA'})
+                            }
+                        }else{
+                            alert('Cadastro Invalido, verifique informações')
+                            this.setState({messageNoValidoMOTO: 'ESCOLHA UMA OPÇÂO'})
+                        }
+                    }else{
+                        alert('Cadastro Invalido, verifique informações')
+                    }
+                }else{
+                    alert('Cadastro Invalido, verifique informações')
+                }
+            }else{
+                alert('Cadastro Invalido, verifique informações')
+            } 
+        }
+        if(id === 'form2'){
+            if(this.state.nome !== ''){
+                if(this.state.genero !== ''){
+                    if(this.state.rg !== ''){
+                        if(this.state.emissao !== ''){
+                            if(this.state.ufdoc !== ''){
+                                if(this.state.uf !== ''){
+                                    if(this.state.naturalidade !== ''){
+                                        if(this.state.email !== ''){
+                                            if(this.state.mae !== ''){
+                                                if(this.state.pai !== ''){
+                                                    window.location.href = "#form3"
+                                                }else {
+                                                    alert('Cadastro Invalido, verifique informações')
+                                                }
+                                            }else {
+                                                alert('Cadastro Invalido, verifique informações')
+                                            }
+                                        }else {
+                                            alert('Cadastro Invalido, verifique informações')
+                                        }
+                                    }else {
+                                        alert('Cadastro Invalido, verifique informações')
+                                    }
+                                }else{
+                                    alert('Cadastro Invalido, verifique informações')
+                                    
+
+                                }
+                            }else{
+                                alert('Cadastro Invalido, verifique informações')
+                                
+                            }
+                        }else{
+                            alert('Cadastro Invalido, verifique informações')
+                            
+                        }
+                    }else{
+                        alert('Cadastro Invalido, verifique informações')
+                    }
+                }else{
+                    alert('Cadastro Invalido, verifique informações')
+                }
+            }else{
+                alert('Cadastro Invalido, verifique informações')
+            } 
+        }
+        if(id === 'form3'){
+            if(this.state.cargo !== ''){
+                if(this.state.profissao !== ''){
+                    if(this.state.telcomercial !== ''){
+                        if(this.state.renda !== ''){
+                            if(this.state.compRenda !== ''){
+                                window.location.href = "#form4"
                             }else{
                                 alert('Cadastro Invalido, verifique informações')
                             }
@@ -479,16 +645,95 @@ class Form1 extends React.Component {
                 }
             }else{
                 alert('Cadastro Invalido, verifique informações')
-            }
-        }else{
-            alert('Cadastro Invalido, verifique informações')
-        } */
+            }  
+        }
+        
+
+        
         e.preventDefault()
     }
     handleSubmitEnv(e) {
+        const target = e.target
+        const id = target.id
+        console.log(this.state)
         
-        alert(this.state)
-        e.preventDefault()
+        if(id === 'form4'){
+            if(this.state.cep !== ''){
+                if(this.state.rua !== ''){
+                    if(this.state.nCasa !== ''){
+                        if(this.state.estado !== ''){
+                            if(this.state.cidade !== ''){
+                                if(this.state.bairro !== ''){
+                                    const dados = {
+                                        /* pagina 1  */
+                                        cpf: this.state.cpf,
+                                        telefone: this.state.telefone,
+                                        nasc: this.state.nasc,
+                                        moto: this.state.moto,
+                                        entrada: this.state.entrada,
+                                        prazo: this.state.prazo, 
+                                        /* pagina 2 */
+                                        nome: this.state.nome,
+                                        genero:this.state.genero,
+                                        rg: this.state.rg,
+                                        emissao: this.state.emissao,
+                                        ufdoc: this.state.ufdoc,
+                                        uf: this.state.uf,
+                                        naturalidade: this.state.naturalidade,
+                                        email: this.state.email,
+                                        mae: this.state.mae,
+                                        pai: this.state.pai,
+                                        /* pagina 3 */
+                                        cargo: this.state.cargo,
+                                        profissao: this.state.profissao,
+                                        instituicao: this.state.instituicao,
+                                        cnpj: this.state.cnpj,
+                                        empresa: this.state.empresa,
+                                        admissao: this.state.admissao,
+                                        telcomercial: this.state.telcomercial,
+                                        renda: this.state.renda,
+                                        compRenda: this.state.compRenda,
+                                        /* Pagina 4 */
+                                        cep: this.state.cep,
+                                        rua: this.state.rua,
+                                        nCasa: this.state.nCasa,
+                                        complemento: this.state.complemento,
+                                        estado: this.state.estado,
+                                        cidade: this.state.cidade,
+                                        bairro: this.state.bairro,
+                                    }
+                                    var dadosTXT = JSON.stringify(dados)
+                                    console.log(dadosTXT)
+                                    preencher(dadosTXT)
+                                    e.preventDefault()
+                                    emailjs.sendForm('idservice2', 'template_p9623cj', e.target, 'user_Ed3D1EkBH2vEa3111vafs')
+                                    .then((result) => {
+                                        console.log(result.text);
+                                    }, (error) => {
+                                        console.log(error.text);
+                                    })
+                                }else{
+                                    alert('Cadastro Invalido, verifique informações')
+                                }
+                                
+                            }else{
+                                alert('Cadastro Invalido, verifique informações')
+                            }
+                        }else{
+                            alert('Cadastro Invalido, verifique informações')
+                        }
+                    }else{
+                        alert('Cadastro Invalido, verifique informações')
+                    }
+                }else{
+                    alert('Cadastro Invalido, verifique informações')
+                }
+            }else{
+                alert('Cadastro Invalido, verifique informações')
+            }  
+        }
+
+        
     }
 
     
@@ -549,6 +794,7 @@ class Form1 extends React.Component {
                            <option value="selected"></option>
                            <option value="60">60x</option>
                            <option value="48">48x</option>
+                           <option value="36">36x</option>
                            <option value="24">24x</option>
                            <option value="12">12x</option>
                        </select>
@@ -695,7 +941,7 @@ class Form1 extends React.Component {
                    <button type="submit" className="submit">Proximo</button>
                 </form>
                 {/* Pagina 3 */}
-                <form id="form3" onSubmit={this.handleSubmitProx} className="form form3">
+                <form id="form3" onSubmit={this.handleSubmitProx} className="form form2 form3">
                     <div className="subtitle">Agora preencha seus dados profissionais...</div>
                     {/* cargo */}
                     <div className="input-container ic2">
@@ -753,6 +999,66 @@ class Form1 extends React.Component {
                    </div>                  
                    <button type="submit" className="submit">Proximo</button>
                 </form>
+                {/* Pagina 4 */}
+                <form id="form4" onSubmit={this.handleSubmitEnv} className="form form2 form3">
+                    <div className="subtitle">Ultima pagina !! Uffa, agora só falta seu endereço :</div>
+                    {/* CEP */}
+                    <div className="input-container ic1 cpf">
+                       <input name="cep" id="cep" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">CEP</label>
+                       <div className="error">{this.state.messageNoValidoCEP}</div>
+                   </div>    
+                   {/* RUA */}       
+                   <div className="input-container ic1">
+                       <input name="rua" id="rua" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Rua</label>
+                       <div className="error">{this.state.messageNoValidoRUA}</div>
+                   </div> 
+                    {/* Numero */} 
+                    <div className="input-container ic2">
+                       <input name="nCasa" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Nº</label>
+                       <div className="error messageNaoValido">{this.state.messageNoValidoNCASA}</div>
+                   </div>  
+                   {/* Complemento */}
+                   <div className="input-container ic1">
+                       <input name="complemento" id="complemento" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Complemento</label>
+                       <div className="error">{this.state.messageNoValidoCOMPLEMENTO}</div>
+                   </div> 
+                   {/* Estado */}
+                   <div className="input-container ic1">
+                       <input name="estado" id="uf" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Estado</label>
+                       <div className="error">{this.state.messageNoValidoESTADO}</div>
+                   </div> 
+                   {/* Cidade */}
+                   <div className="input-container ic1">
+                       <input name="cidade" id="cidade" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Cidade</label>
+                       <div className="error">{this.state.messageNoValidoCIDADE}</div>
+                   </div> 
+                   {/* Bairro */}
+                   <div className="input-container ic1">
+                       <input name="bairro" id="bairro" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Bairro</label>
+                       <div className="error">{this.state.messageNoValidoBAIRRO}</div>
+                   </div>  
+                   <div className="input-container ic1 none">
+                       <input name="message" id="message" onChange={this.handleOnChange} onBlur={this.handleOnblur} type="text" className="input" placeholder=" "/>
+                       <div className="cut"></div>
+                       <label className="placeholder" htmlFor="firsname">Dados</label>
+                   </div> 
+                   <button type="submit" className="submit">Enviar</button>
+                </form>
+                   
             </div>
         )
     }
