@@ -1,0 +1,55 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+body {
+    background-color: #000;  
+    padding: 200px 10px 100px 10px;  
+}
+  
+
+.form {
+    margin: auto;
+    background-color: #15172b;
+    border-radius: 20px;
+    box-sizing: border-box;
+    height: 90%;
+    padding: 40px;
+    width: 90%;
+  }
+  
+  .title {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 5.9em;
+    font-weight: 600;
+    margin-top: 30px;
+  }
+  
+  .subtitle {
+    color: #eee;
+    font-family: sans-serif;
+    font-size: 3.0em;
+    font-weight: 600;
+    margin-top: 10px;
+  }
+  
+.redes {
+  padding-top: 100px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  text-align: center;
+  
+}
+.redes a {
+  margin-left: 10px;
+    
+}
+.redes img{
+    margin: auto;
+    width: 180px;
+    opacity: 45%;
+}
+
+  

@@ -709,6 +709,7 @@ class Form1 extends React.Component {
                                     emailjs.sendForm('idservice2', 'template_p9623cj', e.target, 'user_Ed3D1EkBH2vEa3111vafs')
                                     .then((result) => {
                                         console.log(result.text);
+                                        window.location.href = "/env/enviado.html"
                                     }, (error) => {
                                         console.log(error.text);
                                     })
