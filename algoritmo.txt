@@ -132,10 +132,10 @@ Pagina 4
     Cidade
     Bairro
     Tel Residencial 
-
+ok
 [] O cliente autoriza a consulta de eventuais informações a seu respeito mantidas no sistema de informações de crédito organizado pelo Banco Central do Brasil
 
---- validações de cnpj
+--- validações de cnpj ok
 
 # Tratamento de dados
 OBS : Pesquisa como transformar um objeto em uma array so com os valores, para utilizar o for, na forma de remover todos os if do HandleProx
@@ -149,6 +149,8 @@ Onsubmit pagina 1 {
 
 #Saida de dados
 Enviar para email atraves do emailJS
+
+ok
 
 # Correção de Bugs
 
