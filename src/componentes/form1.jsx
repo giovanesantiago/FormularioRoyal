@@ -774,6 +774,11 @@ class Form1 extends React.Component {
                            <option value="Meteor 350 Fireball">Meteor 350 Fireball</option>
                            <option value="Meteor 350 Stellar">Meteor 350 Stellar</option>
                            <option value="Meteor 350 Supernova">Meteor 350 Supernova</option>
+                           <option value="Classic 350 Halcyon">Classic 350 Halcyon</option>
+                           <option value="Classic 350 Signals">Classic 350 Signals</option>
+                           <option value="Classic 350 Dark Stealth Black">Classic 350 Dark Stealth Black</option>
+                           <option value="Classic 350 Gunmetal Grey">Classic 350 Gunmetal Grey</option>
+                           <option value="Classic 350 Chrome">Classic 350 Chrome</option>
                            <option value="Himalayan">Himalayan 411</option>
                            <option value="Interceptor">Interceptor 650</option>
                            <option value="Continental">Continental 650</option>
